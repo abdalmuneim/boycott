@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:boycott_pro/common/utils/banner_ad.dart';
+import 'package:boycott_pro/common/utils/interstitial_ad.dart';
 import 'package:boycott_pro/split_nodel.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lottie/lottie.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +14,8 @@ import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart
 import 'package:permission_handler/permission_handler.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   runApp(const App());
 }
 
@@ -21,7 +26,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Text Recognition Flutter',
+      title: Get.locale?.languageCode != 'ar' ? 'BOYCOTT PRO' : 'مقاطعة',
       theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
@@ -52,7 +57,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-
+    AdInterstitialWid.instance.loadAdInterstitial();
     _future = _requestCameraPermission();
   }
 
@@ -81,61 +86,75 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _future,
-      builder: (context, snapshot) {
-        return Stack(
-          children: [
-            if (_isPermissionGranted)
-              FutureBuilder<List<CameraDescription>>(
-                future: availableCameras(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    _initCameraController(snapshot.data!);
+    return StreamBuilder(
+        stream: Stream.periodic(
+          const Duration(seconds: 30),
+          (computationCount) {
+            print(computationCount);
+            AdInterstitialWid.instance.loadAdInterstitial();
+          },
+        ),
+        builder: (context, snapshot) {
+          return FutureBuilder(
+            future: _future,
+            builder: (context, snapshot) {
+              return Stack(
+                children: [
+                  if (_isPermissionGranted)
+                    FutureBuilder<List<CameraDescription>>(
+                      future: availableCameras(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          _initCameraController(snapshot.data!);
 
-                    return CameraPreview(_cameraController!);
-                  } else {
-                    return const LinearProgressIndicator();
-                  }
-                },
-              ),
-            Scaffold(
-              appBar: AppBar(
-                title: const Text('فحص المنتج'),
-                centerTitle: true,
-              ),
-              backgroundColor: _isPermissionGranted ? Colors.transparent : null,
-              body: _isPermissionGranted
-                  ? Column(
-                      children: [
-                        Container(
-                          height: MediaQuery.of(context).size.height / 1.5,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(bottom: 30.0),
-                          child: Center(
-                            child: ElevatedButton(
-                              onPressed: _scanImage,
-                              child: const Text('أمسح النص'),
+                          return CameraPreview(_cameraController!);
+                        } else {
+                          return const LinearProgressIndicator();
+                        }
+                      },
+                    ),
+                  Scaffold(
+                    bottomNavigationBar: const AdBannerWidget(),
+                    appBar: AppBar(
+                      title: const Text('فحص المنتج'),
+                      centerTitle: true,
+                    ),
+                    backgroundColor:
+                        _isPermissionGranted ? Colors.transparent : null,
+                    body: _isPermissionGranted
+                        ? Column(
+                            children: [
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height / 1.5,
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(bottom: 30.0),
+                                child: Center(
+                                  child: ElevatedButton(
+                                    onPressed: _scanImage,
+                                    child: const Text('أمسح النص'),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : Center(
+                            child: Container(
+                              padding: const EdgeInsets.only(
+                                  left: 24.0, right: 24.0),
+                              child: const Text(
+                                'تم رفض إذن الكاميرا \nيجب تفعيل اذن الكاميرا',
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    )
-                  : Center(
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                        child: const Text(
-                          'تم رفض إذن الكاميرا \nيجب تفعيل اذن الكاميرا',
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-            ),
-          ],
-        );
-      },
-    );
+                  ),
+                ],
+              );
+            },
+          );
+        });
   }
 
   Future<void> _requestCameraPermission() async {

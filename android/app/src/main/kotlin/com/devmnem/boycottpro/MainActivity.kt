@@ -1,4 +1,4 @@
-package com.example.boycott_pro
+package com.devmnem.boycottpro
 
 import io.flutter.embedding.android.FlutterActivity
 
