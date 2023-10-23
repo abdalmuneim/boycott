@@ -1,14 +1,13 @@
-import 'dart:developer';
-
-import 'package:boycott_pro/const.dart';
+import 'package:boycott_pro/common/constant/const.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdInterstitialWid {
   static AdInterstitialWid instance = _init;
   static final AdInterstitialWid _init = AdInterstitialWid();
 
-  static late InterstitialAd _interstitialAd;
-  static bool _isRAdReady = false;
+  late InterstitialAd interstitialAd;
+  bool isAdReady = false;
+  bool isAdShowed = false;
 
   void loadAdInterstitial() {
     InterstitialAd.load(
@@ -16,33 +15,33 @@ class AdInterstitialWid {
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (ad) {
-            _interstitialAd = ad;
-            _isRAdReady = true;
+            interstitialAd = ad;
+            isAdReady = true;
             _showInterstitialAd();
           },
           onAdFailedToLoad: (error) {
             // onCompletedAd;
-            log('ad is failed to load: ${error.message}');
           },
         ));
   }
 
   _showInterstitialAd() {
-    if (_isRAdReady) {
-      _interstitialAd.show();
-      _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+    if (isAdReady) {
+      interstitialAd.show();
+      interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
         onAdShowedFullScreenContent: (InterstitialAd ad) {
-          log('%ad onAdShowedFullScreenContent.');
+          isAdShowed = true;
         },
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
-          log('$ad onAdDismissedFullScreenContent.');
-          _interstitialAd.dispose();
+          isAdReady = false;
+          isAdShowed = false;
+          interstitialAd.dispose();
         },
         onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-          log('$ad onAdFailedToShowFullScreenContent: $error');
+          isAdReady = false;
           ad.dispose();
         },
-        onAdImpression: (InterstitialAd ad) => log('$ad impression occurred.'),
+        onAdImpression: (InterstitialAd ad) {},
       );
     }
   }
