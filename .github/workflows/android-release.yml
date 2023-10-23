@@ -1,15 +1,12 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Android Release
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    types:
+      - closed
 
 jobs:
   build:
@@ -20,6 +17,8 @@ jobs:
   
       - name: Check PR merge or commit message
         id: pr_or_commit
+        if: github.event_name == 'pull_request' && github.event.action == 'closed' || contains(github.event.head_commit.message, 'build release')
+
         run: |
           if [[ ${{ github.event_name }} == 'pull_request' && ${{ github.event.pull_request.merged }} == 'true' ]]; then
             PR_MERGED=true
@@ -75,8 +74,8 @@ jobs:
         run: flutter analyze
       
       - name: Read release version
-        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
         id: read-version
+        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
         uses: NiklasLehnfeld/flutter-version-number-action@main
         with:
           file-path: pubspec.yaml      
