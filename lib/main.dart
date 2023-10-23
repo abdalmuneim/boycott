@@ -90,7 +90,6 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         stream: Stream.periodic(
           const Duration(seconds: 30),
           (computationCount) {
-            print(computationCount);
             AdInterstitialWid.instance.loadAdInterstitial();
           },
         ),
@@ -254,9 +253,9 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           await textRecognizer.processImage(inputImage);
 
       _text.text = recognizedText.text.replaceAll(' ', '').replaceAll('\n', '');
-      print('_text.text: ${_text.text}');
+
       _checked = await _searchWordInJson(_text.text.toLowerCase());
-      print('_text.text: ${_text.text}');
+
       setState(() {});
       if (_checked) {
         _canPayPro(
@@ -264,11 +263,9 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
             gif: 'assets/no.json',
             title: 'هذا المنتج اسرائيلي يجب مقاطعته');
       } else {
-        Navigator.canPop(context) ? Navigator.of(context).pop() : null;
         _showEditValue();
       }
     } catch (e) {
-      print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('حدث خطأ أثناء مسح النص ضوئيًا'),
