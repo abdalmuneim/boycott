@@ -8,32 +8,19 @@ on:
     types:
       - closed
 
+  workflow_dispatch:
+
 jobs:
   build:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' || contains(github.event.head_commit.message, 'build release')
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-  
-      - name: Check PR merge or commit message
-        id: pr_or_commit
-        if: github.event_name == 'pull_request' && github.event.action == 'closed' || contains(github.event.head_commit.message, 'build release')
+     # Readies your repository under $GITHUB_WORKSPACE, so your job can access it
 
-        run: |
-          if [[ ${{ github.event_name }} == 'pull_request' && ${{ github.event.pull_request.merged }} == 'true' ]]; then
-            PR_MERGED=true
-            echo "PR_MERGED=true" >> $GITHUB_ENV
-          fi
-          if [[ ${{ github.event_name }} == 'push' ]]; then
-            COMMIT_MESSAGE=$(git log -1 --pretty=format:%s)
-            if [[ $COMMIT_MESSAGE == "build release" ]]; then
-              BUILD_RELEASE=true
-              echo "BUILD_RELEASE=true" >> $GITHUB_ENV
-            fi
-          fi
-  
+      - uses: actions/checkout@v3
+
+      # Sets up Java so your job can use it for the Flutter app build
       - name: Setup Java 
-        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
         uses: actions/setup-java@v2
         with:
           distribution: "zulu"
@@ -42,7 +29,6 @@ jobs:
       
       # Sets up Flutter using the subosito Flutter workflow
       - name: Sets up Flutter using the subosito Flutter workflow
-        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
         uses: subosito/flutter-action@v2
         with:
         # Adjusts to the Flutter version you are working with
@@ -53,7 +39,6 @@ jobs:
 
       # caching build  - gradle  - pub-cache
       - name: Cache
-        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
         uses: actions/cache@v2
         with:
           path: |
@@ -62,7 +47,6 @@ jobs:
           key: ${{ runner.os }}-build_and_android-${{ hashFiles('**/*.gradle*', 'pubspec.lock') }}
 
       - name: Install Flutter dependencies
-        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
         run: flutter pub get
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
@@ -70,23 +54,19 @@ jobs:
       #   run: dart format --output=none --set-exit-if-changed .
 
       - name: Analyze project 
-        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
         run: flutter analyze
       
       - name: Read release version
         id: read-version
-        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
         uses: NiklasLehnfeld/flutter-version-number-action@main
         with:
           file-path: pubspec.yaml      
       
       - name: Start release build APK
-        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
         run: flutter build apk --release
 
       # Uploaded the APK release as an artifact to be used in the next job
       - name: Upload APK Release
-        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
         uses: actions/upload-artifact@v2
         with:
           name: apk-release
@@ -94,7 +74,7 @@ jobs:
 
       # --- creating github apk-release ---
       - name: Create apk-release in GitHub
-        if: ${{ steps.pr_or_commit.outputs.PR_MERGED == 'true' || steps.pr_or_commit.outputs.BUILD_RELEASE == 'true' }}
+       
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/app-release.apk"
