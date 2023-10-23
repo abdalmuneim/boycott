@@ -1,0 +1,314 @@
+[
+    {
+        "id": 1,
+        "text": "Netflix"
+    },
+    {
+        "id": 2,
+        "text": "Pepsi"
+    },
+    {
+        "id": 3,
+        "text": "Sprite"
+    },
+    {
+        "id": 4,
+        "text": "7UP"
+    },
+    {
+        "id": 5,
+        "text": "Fanta"
+    },
+    {
+        "id": 6,
+        "text": "CocaCola"
+    },
+    {
+        "id": 7,
+        "text": "Nescafe"
+    },
+    {
+        "id": 8,
+        "text": "L'Oreal"
+    },
+    {
+        "id": 9,
+        "text": "Lay's"
+    },
+    {
+        "id": 10,
+        "text": "Doritos"
+    },
+    {
+        "id": 11,
+        "text": "Milka"
+    },
+    {
+        "id": 12,
+        "text": "Lipton"
+    },
+    {
+        "id": 13,
+        "text": "Oreo"
+    },
+    {
+        "id": 14,
+        "text": "Evian"
+    },
+    {
+        "id": 15,
+        "text": "KFC"
+    },
+    {
+        "id": 16,
+        "text": "MAC"
+    },
+    {
+        "id": 17,
+        "text": "OMO"
+    },
+    {
+        "id": 18,
+        "text": "Puma"
+    },
+    {
+        "id": 19,
+        "text": "Carrefour"
+    },
+    {
+        "id": 20,
+        "text": "Marlboro"
+    },
+    {
+        "id": 21,
+        "text": "HP"
+    },
+    {
+        "id": 22,
+        "text": "Cheetos"
+    },
+    {
+        "id": 23,
+        "text": "Nike"
+    },
+    {
+        "id": 24,
+        "text": "Avon"
+    },
+    {
+        "id": 25,
+        "text": "Schweppes"
+    },
+    {
+        "id": 26,
+        "text": "Papa John's"
+    },
+    {
+        "id": 27,
+        "text": "IBM"
+    },
+    {
+        "id": 28,
+        "text": "Dell"
+    },
+    {
+        "id": 29,
+        "text": "Signal"
+    },
+    {
+        "id": 30,
+        "text": "Hardee's"
+    },
+    {
+        "id": 31,
+        "text": "Burger King"
+    },
+    {
+        "id": 32,
+        "text": "Mirinda"
+    },
+    {
+        "id": 33,
+        "text": "Tang Drink"
+    },
+    {
+        "id": 34,
+        "text": "Pringles"
+    },
+    {
+        "id": 35,
+        "text": "Danone"
+    },
+    {
+        "id": 36,
+        "text": "Knorr"
+    },
+    {
+        "id": 37,
+        "text": "Siemens"
+    },
+    {
+        "id": 38,
+        "text": "Cappy Juice"
+    },
+    {
+        "id": 39,
+        "text": "Prima diapers"
+    },
+    {
+        "id": 40,
+        "text": "Cadbury"
+    },
+    {
+        "id": 41,
+        "text": "Dove"
+    },
+    {
+        "id": 42,
+        "text": "Dettol"
+    },
+    {
+        "id": 43,
+        "text": "Claire"
+    },
+    {
+        "id": 44,
+        "text": "Nestle"
+    },
+    {
+        "id": 45,
+        "text": "Disney"
+    },
+    {
+        "id": 46,
+        "text": "Pantene"
+    },
+    {
+        "id": 47,
+        "text": "Kat"
+    },
+    {
+        "id": 48,
+        "text": "Head and Shoulders"
+    },
+    {
+        "id": 49,
+        "text": "Hayat Mineral Water"
+    },
+    {
+        "id": 50,
+        "text": "Vanish"
+    },
+    {
+        "id": 51,
+        "text": "Brill"
+    },
+    {
+        "id": 52,
+        "text": "Oxy"
+    },
+    {
+        "id": 53,
+        "text": "Tropicana"
+    },
+    {
+        "id": 54,
+        "text": "Nokia"
+    },
+    {
+        "id": 55,
+        "text": "Timberland"
+    },
+    {
+        "id": 56,
+        "text": "Pampers"
+    },
+    {
+        "id": 57,
+        "text": "Polo"
+    },
+    {
+        "id": 58,
+        "text": "Nivea"
+    },
+    {
+        "id": 59,
+        "text": "Johnson"
+    },
+    {
+        "id": 60,
+        "text": "Colgate"
+    },
+    {
+        "id": 61,
+        "text": "Adidas"
+    },
+    {
+        "id": 62,
+        "text": "Vaseline"
+    },
+    {
+        "id": 63,
+        "text": "Olay"
+    },
+    {
+        "id": 64,
+        "text": "M&M's"
+    },
+    {
+        "id": 65,
+        "text": "Rexona"
+    },
+    {
+        "id": 66,
+        "text": "Kit Kat"
+    },
+    {
+        "id": 67,
+        "text": "Dettol"
+    },
+    {
+        "id": 68,
+        "text": "Cappy"
+    },
+    {
+        "id": 69,
+        "text": "Disney"
+    },
+    {
+        "id": 70,
+        "text": "Hyundai"
+    },
+    {
+        "id": 71,
+        "text": "Cerelac"
+    },
+    {
+        "id": 72,
+        "text": "Lux"
+    },
+    {
+        "id": 73,
+        "text": "Lifebuoy"
+    },
+    {
+        "id": 74,
+        "text": "Sun Silk"
+    },
+    {
+        "id": 75,
+        "text": "Cornflakes"
+    },
+    {
+        "id": 76,
+        "text": "Nido"
+    },
+    {
+        "id": 77,
+        "text": "Nesquik"
+    },
+    {
+        "id": 78,
+        "text": "Baraka"
+    }
+]
