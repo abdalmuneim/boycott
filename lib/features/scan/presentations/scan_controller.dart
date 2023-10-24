@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:boycott_pro/common/utils/utils.dart';
 import 'package:boycott_pro/common/utils/widgets/dialog_search.dart';
 import 'package:boycott_pro/features/scan/models/split_model.dart';
+import 'package:boycott_pro/generated/assets/assets.dart';
+import 'package:boycott_pro/generated/l10n.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_admob_config/firebase_admob_config.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +33,17 @@ class ScanController extends GetxController with WidgetsBindingObserver {
   bool get checked => _checked;
   bool _scanning = false;
   bool get scanning => _scanning;
+  bool _isDispose = false;
+  bool get isDispose => _isDispose;
+  bool _sending = false;
+  bool get sending => _sending;
 
+  final GlobalKey<FormState> _globalKey = GlobalKey();
+  GlobalKey<FormState> get globalKey => _globalKey;
   final TextEditingController _text = TextEditingController();
   TextEditingController get text => _text;
+  final TextEditingController _productName = TextEditingController();
+  TextEditingController get productName => _productName;
 
   // ignore: unused_field
   late Timer _timer;
@@ -72,11 +82,12 @@ class ScanController extends GetxController with WidgetsBindingObserver {
     _scanning = true;
     update();
     try {
-      final pictureFile = await _cameraController!.takePicture();
+      final XFile pictureFile = await _cameraController!.takePicture();
 
-      final file = File(pictureFile.path);
+      final File file = File(pictureFile.path);
 
-      final inputImage = InputImage.fromFile(file);
+      final InputImage inputImage = InputImage.fromFile(file);
+
       final RecognizedText recognizedText =
           await textRecognizer.processImage(inputImage);
 
@@ -84,22 +95,26 @@ class ScanController extends GetxController with WidgetsBindingObserver {
 
       _checked = await searchWordInJson(_text.text.toLowerCase());
       _scanning = false;
-
       update();
+
       if (_checked) {
         Utils.canPayPro(
-            product: _text.text,
-            gif: 'assets/no.json',
-            title: 'هذا المنتج اسرائيلي يجب مقاطعته');
+            gif: Assets.assetsNo,
+            title: S.of(Get.context!).boycottThisProduct(_text.text));
       } else {
-        DialogSearch.showEditValue(_checked);
+        _stopCamera();
+        bool search =
+            await DialogSearchAndAddNewProduct.showEditValue(_checked);
+
+        search ? _startCamera() : null;
       }
     } catch (e) {
+      _startCamera();
       _scanning = false;
       update();
       ScaffoldMessenger.of(Get.context!).showSnackBar(
-        const SnackBar(
-          content: Text('حدث خطأ أثناء مسح النص ضوئيًا'),
+        SnackBar(
+          content: Text(S.of(Get.context!).anErrorOccurredWhileScanningText),
         ),
       );
     }
@@ -114,12 +129,16 @@ class ScanController extends GetxController with WidgetsBindingObserver {
   void _startCamera() {
     if (_cameraController != null) {
       _cameraSelected(_cameraController!.description);
+      _isDispose = false;
+      update();
     }
   }
 
   void _stopCamera() {
     if (_cameraController != null) {
       _cameraController?.dispose();
+      _isDispose = true;
+      update();
     }
   }
 
@@ -168,6 +187,15 @@ class ScanController extends GetxController with WidgetsBindingObserver {
         interstitialAd.run();
       },
     );
+  }
+
+  newProducts() {
+    DialogSearchAndAddNewProduct.newProductsDialog();
+  }
+
+  changeSend() {
+    _sending = !_sending;
+    update();
   }
 
   @override

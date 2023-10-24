@@ -38,6 +38,26 @@ jobs:
 
       - name: Build APK
         run: flutter build apk --release
+      - name: Upload APK Release
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk-release
+          path: build/app/outputs/flutter-apk/app-release.apk
+     
+      - name: Read release version
+        id: read-version
+        uses: NiklasLehnfeld/flutter-version-number-action@main
+        with:
+          file-path: pubspec.yaml
+    
+      # --- creating github apk-release ---
+      - name: Create APK-release in GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: APK_Release_${{ steps.read-version.outputs.version-number }}
+          allowUpdates: true
 
   build_ios:
     name: Build iOS Release
@@ -65,3 +85,24 @@ jobs:
 
       - name: Build iOS Release
         run: flutter build ios --release --no-codesign
+      
+      - name: Upload iOS App
+        uses: actions/upload-artifact@v2
+        with:
+          name: ios-app
+          path: build/ios/Runner/ReleaseRunner.ipa
+      
+      - name: Read release version
+        id: read-version
+        uses: NiklasLehnfeld/flutter-version-number-action@main
+        with:
+          file-path: pubspec.yaml
+     
+          # --- creating github IOS-release ---
+      - name: Create IOS-release in GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/ios/Runner/ReleaseRunner.ipa"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: IOS_Release_${{ steps.read-version.outputs.version-number }}
+          allowUpdates: true

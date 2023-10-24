@@ -1,0 +1,19 @@
+{
+  "scanProduct": "Scan Product",
+  "scanText": "Scan Text",
+  "requestPermission": "Camera permission denied.\nCamera permission must be enabled.",
+  "clickToEnable": "Click to Enable",
+  "boycottThisProduct": "Boycott this {pro} Product",
+  "anErrorOccurredWhileScanningText": "An error occurred while scanning text",
+  "thisProductIsVeryGood": "This {pro} product is very good",
+  "yes": "Yes",
+  "send": "Send",
+  "someThingHappened": "Something happened",
+  "successSend": "Sent successfully",
+  "cancel": "Cancel",
+  "thisFieldRequired": "This field is required",
+  "boycottProduct": "Add Product",
+  "isThisTheProductName": "Is this {pro} the name of the product",
+  "edit": "Edit",
+  "cameraClosed": "تم غلق الكاميرا"
+}

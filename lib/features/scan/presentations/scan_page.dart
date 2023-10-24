@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:boycott_pro/features/scan/presentations/scan_controller.dart';
+import 'package:boycott_pro/generated/l10n.dart';
 
 import 'package:camera/camera.dart';
 import 'package:firebase_admob_config/firebase_admob_config.dart';
@@ -18,8 +17,13 @@ class ScanPage extends StatelessWidget {
           return SafeArea(
             child: Scaffold(
               appBar: AppBar(
-                title: const Text('فحص المنتج'),
+                title: Text(S.of(context).scanProduct),
                 centerTitle: true,
+                actions: [
+                  IconButton(
+                      onPressed: () => controller.newProducts(),
+                      icon: const Icon(Icons.production_quantity_limits))
+                ],
               ),
               body: FutureBuilder(
                 future: controller.future,
@@ -34,8 +38,9 @@ class ScanPage extends StatelessWidget {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               controller.initCameraController(snapshot.data!);
-                              return CameraPreview(
-                                  controller.cameraController!);
+                              return controller.isDispose
+                                  ? Container()
+                                  : CameraPreview(controller.cameraController!);
                             } else {
                               return const Center(
                                   child: CircularProgressIndicator());
@@ -52,7 +57,7 @@ class ScanPage extends StatelessWidget {
                                   ))
                               : Positioned(
                                   bottom:
-                                      MediaQuery.of(context).size.height / 9,
+                                      MediaQuery.of(context).size.height / 8.5,
                                   child: Center(
                                     child: ElevatedButton(
                                       onPressed: controller.scanImage,
@@ -63,15 +68,16 @@ class ScanPage extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      child: const Row(
+                                      child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Icon(Icons.document_scanner_outlined),
-                                          SizedBox(width: 8),
+                                          const Icon(
+                                              Icons.document_scanner_outlined),
+                                          const SizedBox(width: 8),
                                           Text(
-                                            'مسح النص',
-                                            style: TextStyle(
+                                            S.of(context).scanText,
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ],
@@ -80,19 +86,19 @@ class ScanPage extends StatelessWidget {
                                   ),
                                 )
                           : Positioned(
-                              bottom: MediaQuery.of(context).size.height / 2,
+                              bottom: MediaQuery.of(context).size.height / 2.5,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'تم رفض إذن الكاميرا \nيجب تفعيل اذن الكاميرا',
+                                  Text(
+                                    S.of(context).requestPermission,
                                     textAlign: TextAlign.center,
                                   ),
                                   TextButton(
                                       onPressed: () =>
                                           controller.requestCameraPermission(),
-                                      child: const Text('أضغط للتفعيل'))
+                                      child: Text(S.of(context).clickToEnable))
                                 ],
                               ),
                             ),
@@ -100,11 +106,9 @@ class ScanPage extends StatelessWidget {
                         bottom: 0,
                         child: FutureBuilder(
                           future: Future.delayed(
-                              const Duration(seconds: 10), () => true),
+                              const Duration(seconds: 5), () => true),
                           builder: (context, AsyncSnapshot snapshot) {
-                            log(snapshot.data.toString());
                             if (snapshot.hasData) {
-                              log('snapshot.data.toString()');
                               return AppBannerAd.fromKey(
                                   configKey: 'banner_ad');
                             }

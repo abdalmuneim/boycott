@@ -1,0 +1,19 @@
+{
+  "scanProduct": "فحص المنتج",
+  "scanText": "مسح النص",
+  "requestPermission": "تم رفض إذن الكاميرا \nيجب تفعيل اذن الكاميرا",
+  "clickToEnable": "أضغط للتفعيل",
+  "boycottThisProduct": "قاطع هذا {pro} المنتج",
+  "anErrorOccurredWhileScanningText": "حدث خطأ أثناء مسح النص ضوئيًا",
+  "thisProductIsVeryGood": "{pro} هذا  المنتج جيد جدا",
+  "yes": "نعم",
+  "send": "إرسال",
+  "someThingHappened": "حدث خطاء",
+  "successSend": "تم الارسال بنجاح",
+  "cancel": "إلغاء",
+  "thisFieldRequired": "هذا الحقل مطلوب",
+  "boycottProduct": "أضف منتج",
+  "isThisTheProductName": "هل هذا {pro} اسم المنتج",
+  "edit": "تعديل",
+  "cameraClosed": "تم غلق الكاميرا"
+}
