@@ -29,7 +29,7 @@ class _AdBannerWidgetState extends State<AdBannerWidget> {
   void _createBanner() {
     _bannerAd = BannerAd(
       size: _adSize,
-      adUnitId: Const.adBanner,
+      adUnitId: Const.androidAdBanner,
       listener: BannerAdListener(
           onAdLoaded: (ad) => setState(
                 () {

@@ -1,7 +1,9 @@
-import 'package:boycott_pro/common/utils/banner_ad.dart';
+import 'dart:developer';
+
 import 'package:boycott_pro/features/scan/presentations/scan_controller.dart';
 
 import 'package:camera/camera.dart';
+import 'package:firebase_admob_config/firebase_admob_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -94,7 +96,22 @@ class ScanPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                      const Positioned(bottom: 0, child: AdBannerWidget()),
+                      Positioned(
+                        bottom: 0,
+                        child: FutureBuilder(
+                          future: Future.delayed(
+                              const Duration(seconds: 10), () => true),
+                          builder: (context, AsyncSnapshot snapshot) {
+                            log(snapshot.data.toString());
+                            if (snapshot.hasData) {
+                              log('snapshot.data.toString()');
+                              return AppBannerAd.fromKey(
+                                  configKey: 'banner_ad');
+                            }
+                            return const SizedBox();
+                          },
+                        ),
+                      ),
                     ],
                   );
                 },

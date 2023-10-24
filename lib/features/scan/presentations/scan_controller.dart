@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:boycott_pro/common/utils/interstitial_ad.dart';
 import 'package:boycott_pro/common/utils/utils.dart';
 import 'package:boycott_pro/common/utils/widgets/dialog_search.dart';
 import 'package:boycott_pro/features/scan/models/split_model.dart';
 import 'package:camera/camera.dart';
+import 'package:firebase_admob_config/firebase_admob_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -23,9 +23,6 @@ class ScanController extends GetxController with WidgetsBindingObserver {
 
   CameraController? _cameraController;
   CameraController? get cameraController => _cameraController;
-
-  final AdInterstitialWid _adMob = AdInterstitialWid.instance;
-  AdInterstitialWid get adMob => _adMob;
 
   final TextRecognizer _textRecognizer = TextRecognizer();
   TextRecognizer get textRecognizer => _textRecognizer;
@@ -161,11 +158,14 @@ class ScanController extends GetxController with WidgetsBindingObserver {
     }
   }
 
+  final AppInterstitialAd interstitialAd =
+      AppInterstitialAd.fromKey(configKey: 'interstitial_ad');
+
   _showAd() {
     _timer = Timer.periodic(
       const Duration(minutes: 1),
       (computationCount) {
-        adMob.loadAdInterstitial();
+        interstitialAd.run();
       },
     );
   }

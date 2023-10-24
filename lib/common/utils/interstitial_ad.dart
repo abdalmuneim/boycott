@@ -11,7 +11,7 @@ class AdInterstitialWid {
 
   void loadAdInterstitial() {
     InterstitialAd.load(
-        adUnitId: Const.interstitialAd,
+        adUnitId: Const.androidInterstitialAd,
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (ad) {
