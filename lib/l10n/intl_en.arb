@@ -3,7 +3,7 @@
   "scanText": "Scan Text",
   "requestPermission": "Camera permission denied.\nCamera permission must be enabled.",
   "clickToEnable": "Click to Enable",
-  "boycottThisProduct": "Boycott this {pro} Product",
+  "boycottThisProduct": "Boycott this {pro} Product because it is Israeli.",
   "anErrorOccurredWhileScanningText": "An error occurred while scanning text",
   "thisProductIsVeryGood": "This {pro} product is very good",
   "yes": "Yes",
@@ -15,5 +15,7 @@
   "boycottProduct": "Add Product",
   "isThisTheProductName": "Is this {pro} the name of the product",
   "edit": "Edit",
-  "cameraClosed": "تم غلق الكاميرا"
+  "cameraClosed": "CLosed Camera",
+  "freedomForPalestine": "Freedom for Palestine ",
+  "israeli": "Israeli"
 }

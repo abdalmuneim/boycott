@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(pro) => "قاطع هذا ${pro} المنتج";
+  static String m0(pro) => "قاطع هذا ${pro} المنتج انه اسرائيلي";
 
   static String m1(pro) => "هل هذا ${pro} اسم المنتج";
 
@@ -37,7 +37,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "clickToEnable": MessageLookupByLibrary.simpleMessage("أضغط للتفعيل"),
         "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+        "freedomForPalestine":
+            MessageLookupByLibrary.simpleMessage(" الحرية لفلسطين"),
         "isThisTheProductName": m1,
+        "israeli": MessageLookupByLibrary.simpleMessage("Israeli"),
         "requestPermission": MessageLookupByLibrary.simpleMessage(
             "تم رفض إذن الكاميرا \nيجب تفعيل اذن الكاميرا"),
         "scanProduct": MessageLookupByLibrary.simpleMessage("فحص المنتج"),

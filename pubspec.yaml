@@ -20,6 +20,7 @@ dependencies:
   google_mlkit_text_recognition: ^0.10.0
   permission_handler: ^11.0.1
   lottie: ^2.6.0
+  flutter_animate: ^4.2.0+1
 
   get: ^4.6.5
 
@@ -45,6 +46,7 @@ flutter:
 
   assets:
     - assets/
+    - assets/images/
 
 flutter_assets:
   assets_path: assets/

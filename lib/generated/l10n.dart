@@ -90,10 +90,10 @@ class S {
     );
   }
 
-  /// `Boycott this {pro} Product`
+  /// `Boycott this {pro} Product because it is Israeli.`
   String boycottThisProduct(Object pro) {
     return Intl.message(
-      'Boycott this $pro Product',
+      'Boycott this $pro Product because it is Israeli.',
       name: 'boycottThisProduct',
       desc: '',
       args: [pro],
@@ -210,11 +210,31 @@ class S {
     );
   }
 
-  /// `تم غلق الكاميرا`
+  /// `CLosed Camera`
   String get cameraClosed {
     return Intl.message(
-      'تم غلق الكاميرا',
+      'CLosed Camera',
       name: 'cameraClosed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Freedom for Palestine `
+  String get freedomForPalestine {
+    return Intl.message(
+      'Freedom for Palestine ',
+      name: 'freedomForPalestine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Israeli`
+  String get israeli {
+    return Intl.message(
+      'Israeli',
+      name: 'israeli',
       desc: '',
       args: [],
     );

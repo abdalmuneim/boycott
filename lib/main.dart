@@ -1,5 +1,5 @@
 import 'package:boycott_pro/common/services/ad_mod_service.dart';
-import 'package:boycott_pro/features/scan/presentations/scan_page.dart';
+import 'package:boycott_pro/features/splash/splash_page.dart';
 import 'package:boycott_pro/generated/l10n.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +51,7 @@ class App extends StatelessWidget {
         ],
         supportedLocales: S.delegate.supportedLocales,
         locale: Get.deviceLocale,
-        home: const ScanPage(),
+        home: const SplashPage(),
       );
     });
   }

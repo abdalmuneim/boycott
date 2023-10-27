@@ -47,17 +47,21 @@ class ScanController extends GetxController with WidgetsBindingObserver {
 
   // ignore: unused_field
   late Timer _timer;
+  List<dynamic> _products = [];
 
-  Future<bool> searchWordInJson(String recognizedWord) async {
+  _getProduct() async {
     final String jsonContent =
         await rootBundle.loadString('assets/text_en.json');
+    _products = json.decode(jsonContent);
+    update();
+  }
 
-    final List<dynamic> data = json.decode(jsonContent);
+  Future<bool> searchWordInJson(String recognizedWord) async {
     List<SplitResult> splitResults = [
       SplitResult('', recognizedWord.toLowerCase())
     ];
 
-    for (var splitItem in data) {
+    for (var splitItem in _products) {
       List<SplitResult> newSplitResults = [];
 
       for (SplitResult result in splitResults) {
@@ -201,6 +205,7 @@ class ScanController extends GetxController with WidgetsBindingObserver {
   @override
   void onInit() async {
     _future = requestCameraPermission();
+    _getProduct();
     _showAd();
     update();
     super.onInit();

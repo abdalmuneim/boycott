@@ -90,7 +90,7 @@ class DialogSearchAndAddNewProduct {
               ],
             ),
             title: Text(
-              S.of(context).isThisTheProductName(ScanController.to.text.text),
+              S.of(context).isThisTheProductName(''),
               textAlign: TextAlign.center,
             ),
             actions: [
