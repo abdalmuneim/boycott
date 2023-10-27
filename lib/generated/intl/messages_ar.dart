@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "aNewVersionOfTheAppIsAvailableDoYou": MessageLookupByLibrary.simpleMessage(
+            "A new version of the app is available. Do you want to update now?"),
         "anErrorOccurredWhileScanningText":
             MessageLookupByLibrary.simpleMessage(
                 "حدث خطأ أثناء مسح النص ضوئيًا"),
@@ -51,6 +53,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisFieldRequired":
             MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),
         "thisProductIsVeryGood": m2,
+        "updateAvailable":
+            MessageLookupByLibrary.simpleMessage("Update Available"),
+        "updateLater": MessageLookupByLibrary.simpleMessage("Update Later"),
+        "updateNow": MessageLookupByLibrary.simpleMessage("Update Now"),
         "yes": MessageLookupByLibrary.simpleMessage("نعم")
       };
 }

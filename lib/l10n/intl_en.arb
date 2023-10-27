@@ -17,5 +17,9 @@
   "edit": "Edit",
   "cameraClosed": "CLosed Camera",
   "freedomForPalestine": "Freedom for Palestine ",
-  "israeli": "Israeli"
+  "israeli": "Israeli",
+  "updateAvailable": "Update Available",
+  "aNewVersionOfTheAppIsAvailableDoYou": "A new version of the app is available. Do you want to update now?",
+  "updateNow": "Update Now",
+  "updateLater": "Update Later"
 }

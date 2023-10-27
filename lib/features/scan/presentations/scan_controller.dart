@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:boycott_pro/common/utils/utils.dart';
+import 'package:boycott_pro/common/utils/widgets/check_update.dart';
 import 'package:boycott_pro/common/utils/widgets/dialog_search.dart';
 import 'package:boycott_pro/features/scan/models/split_model.dart';
 import 'package:boycott_pro/generated/assets/assets.dart';
@@ -13,10 +14,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ScanController extends GetxController with WidgetsBindingObserver {
   static ScanController get to => Get.find();
+  InAppUpdate? inAppUpdate;
+
   bool _isPermissionGranted = false;
   bool get isPermissionGranted => _isPermissionGranted;
 
@@ -207,6 +211,7 @@ class ScanController extends GetxController with WidgetsBindingObserver {
     _future = requestCameraPermission();
     _getProduct();
     _showAd();
+    CheckUpdate.instance.checkForUpdates();
     update();
     super.onInit();
   }

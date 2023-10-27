@@ -239,6 +239,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Update Available`
+  String get updateAvailable {
+    return Intl.message(
+      'Update Available',
+      name: 'updateAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A new version of the app is available. Do you want to update now?`
+  String get aNewVersionOfTheAppIsAvailableDoYou {
+    return Intl.message(
+      'A new version of the app is available. Do you want to update now?',
+      name: 'aNewVersionOfTheAppIsAvailableDoYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Now`
+  String get updateNow {
+    return Intl.message(
+      'Update Now',
+      name: 'updateNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Later`
+  String get updateLater {
+    return Intl.message(
+      'Update Later',
+      name: 'updateLater',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
