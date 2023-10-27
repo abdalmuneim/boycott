@@ -7,6 +7,7 @@ class CheckUpdate {
   static CheckUpdate get instance => _init;
   static final CheckUpdate _init = CheckUpdate();
   Future<void> checkForUpdates() async {
+    // checkForUpdate
     final AppUpdateInfo updateStatus = await InAppUpdate.checkForUpdate();
 
     if (updateStatus.updateAvailability == UpdateAvailability.updateAvailable) {
