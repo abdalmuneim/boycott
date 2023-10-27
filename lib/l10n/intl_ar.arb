@@ -18,8 +18,8 @@
   "cameraClosed": "تم غلق الكاميرا",
   "freedomForPalestine": " الحرية لفلسطين",
   "israeli": "Israeli",
-  "updateAvailable": "Update Available",
-  "aNewVersionOfTheAppIsAvailableDoYou": "A new version of the app is available. Do you want to update now?",
-  "updateNow": "Update Now",
-  "updateLater": "Update Later"
+  "updateAvailable": "التحديث متاح",
+  "aNewVersionOfTheAppIsAvailableDoYou": "يتوفر إصدار جديد من التطبيق. هل تريد التحديث الآن؟",
+  "updateNow": "تحديث الان",
+  "updateLater": "التحديث لاحقا"
 }
