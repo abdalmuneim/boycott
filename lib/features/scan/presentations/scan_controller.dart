@@ -188,13 +188,8 @@ class ScanController extends GetxController with WidgetsBindingObserver {
   final AppInterstitialAd interstitialAd =
       AppInterstitialAd.fromKey(configKey: 'interstitial_ad');
 
-  _showAd() {
-    _timer = Timer.periodic(
-      const Duration(minutes: 1),
-      (computationCount) {
-        interstitialAd.run();
-      },
-    );
+  showAd() {
+    interstitialAd.run();
   }
 
   newProducts() {
@@ -210,7 +205,7 @@ class ScanController extends GetxController with WidgetsBindingObserver {
   void onInit() async {
     _future = requestCameraPermission();
     _getProduct();
-    _showAd();
+
     CheckUpdate.instance.checkForUpdates();
     update();
     super.onInit();
@@ -229,7 +224,6 @@ class ScanController extends GetxController with WidgetsBindingObserver {
         _cameraController != null &&
         _cameraController!.value.isInitialized) {
       _startCamera();
-      _showAd();
     }
   }
 

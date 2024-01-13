@@ -1,3 +1,4 @@
+import 'package:boycott_pro/features/scan/presentations/scan_controller.dart';
 import 'package:boycott_pro/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,7 +55,10 @@ class Utils {
             ),
             actions: [
               TextButton(
-                onPressed: () => Get.back(result: true),
+                onPressed: () {
+                  ScanController.to.showAd();
+                  Get.back(result: true);
+                },
                 child: Text(
                   S.of(context).cancel,
                   style: const TextStyle(fontSize: 18),

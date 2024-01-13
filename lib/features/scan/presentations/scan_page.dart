@@ -106,7 +106,7 @@ class ScanPage extends StatelessWidget {
                         bottom: 0,
                         child: FutureBuilder(
                           future: Future.delayed(
-                              const Duration(seconds: 5), () => true),
+                              const Duration(seconds: 7), () => true),
                           builder: (context, AsyncSnapshot snapshot) {
                             if (snapshot.hasData) {
                               return AppBannerAd.fromKey(

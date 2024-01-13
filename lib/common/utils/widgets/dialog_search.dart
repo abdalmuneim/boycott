@@ -27,6 +27,8 @@ class DialogSearchAndAddNewProduct {
           actions: [
             TextButton(
               onPressed: () {
+                ScanController.to.showAd();
+
                 Get.back();
               },
               child: Text(S.of(context).cancel),
@@ -41,6 +43,8 @@ class DialogSearchAndAddNewProduct {
                   )
                 : TextButton(
                     onPressed: () async {
+                      ScanController.to.showAd();
+
                       if (controller.globalKey.currentState!.validate()) {
                         controller.changeSend();
                         NotificationServiceImpl notificationFirebaseImpl =
@@ -95,7 +99,10 @@ class DialogSearchAndAddNewProduct {
             ),
             actions: [
               TextButton(
-                onPressed: () => Get.back(result: true),
+                onPressed: () {
+                  ScanController.to.showAd();
+                  Get.back(result: true);
+                },
                 child: Text(
                   S.of(context).cancel,
                   style: const TextStyle(fontSize: 18),
