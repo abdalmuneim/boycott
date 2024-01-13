@@ -7,14 +7,12 @@ on:
   pull_request:
     types:
       - closed
-    branches:
-      - main
 
   workflow_dispatch:
 
 jobs:
   build:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' || contains(github.event.head_commit.message, 'build release')
+    # if: github.event_name == 'pull_request' && github.event.action == 'closed' || contains(github.event.head_commit.message, 'build release')
     runs-on: ubuntu-latest
     steps:
      # Readies your repository under $GITHUB_WORKSPACE, so your job can access it
