@@ -1,0 +1,108 @@
+name: Build and Release Flutter App
+
+on:
+  push:
+    branches: [ "main", "release" ]
+  pull_request:
+    branches: [ "main",  "release" ]
+  workflow_dispatch:
+
+jobs:
+  build_android:
+    if: github.event.pull_request.merged == true || github.event.commits.message=='release'
+    
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
+      - name: Build APK
+        run: flutter build apk --release
+      - name: Upload APK Release
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk-release
+          path: build/app/outputs/flutter-apk/app-release.apk
+     
+      - name: Read release version
+        id: read-version
+        uses: NiklasLehnfeld/flutter-version-number-action@main
+        with:
+          file-path: pubspec.yaml
+    
+      # --- creating github apk-release ---
+      - name: Create APK-release in GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: APK_Release_${{ steps.read-version.outputs.version-number }}
+          allowUpdates: true
+
+  build_ios:
+    if: github.event.pull_request.merged == true || github.event.commits.message=='release'
+
+    name: Build iOS Release
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
+      - name: Build iOS Release
+        run: flutter build ios --release --no-codesign
+      
+      - name: Upload iOS App
+        uses: actions/upload-artifact@v2
+        with:
+          name: ios-app
+          path: build/ios/Runner/ReleaseRunner.ipa
+      
+      - name: Read release version
+        id: read-version
+        uses: NiklasLehnfeld/flutter-version-number-action@main
+        with:
+          file-path: pubspec.yaml
+     
+          # --- creating github IOS-release ---
+      - name: Create IOS-release in GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/ios/Runner/ReleaseRunner.ipa"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: IOS_Release_${{ steps.read-version.outputs.version-number }}
+          allowUpdates: true

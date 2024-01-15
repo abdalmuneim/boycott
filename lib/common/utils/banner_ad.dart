@@ -1,6 +1,4 @@
-import 'dart:developer';
-
-import 'package:boycott_pro/const.dart';
+import 'package:boycott_pro/common/constant/const.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -31,16 +29,14 @@ class _AdBannerWidgetState extends State<AdBannerWidget> {
   void _createBanner() {
     _bannerAd = BannerAd(
       size: _adSize,
-      adUnitId: Const.adBanner,
+      adUnitId: Const.androidAdBanner,
       listener: BannerAdListener(
           onAdLoaded: (ad) => setState(
                 () {
                   _isLoad = true;
                 },
               ),
-          onAdFailedToLoad: (ad, error) {
-            log('ad load failed --> ${error.message}');
-          }),
+          onAdFailedToLoad: (ad, error) {}),
       request: const AdRequest(),
     );
     _bannerAd.load();

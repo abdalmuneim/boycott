@@ -20,6 +20,46 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(pro) => "Boycott this ${pro} Product because it is Israeli.";
+
+  static String m1(pro) => "Is this ${pro} the name of the product";
+
+  static String m2(pro) => "This ${pro} product is very good";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "aNewVersionOfTheAppIsAvailableDoYou": MessageLookupByLibrary.simpleMessage(
+            "A new version of the app is available. Do you want to update now?"),
+        "anErrorOccurredWhileScanningText":
+            MessageLookupByLibrary.simpleMessage(
+                "An error occurred while scanning text"),
+        "boycottProduct": MessageLookupByLibrary.simpleMessage("Add Product"),
+        "boycottThisProduct": m0,
+        "cameraClosed": MessageLookupByLibrary.simpleMessage("CLosed Camera"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "clickToEnable":
+            MessageLookupByLibrary.simpleMessage("Click to Enable"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "freedomForPalestine":
+            MessageLookupByLibrary.simpleMessage("Freedom for Palestine "),
+        "isThisTheProductName": m1,
+        "israeli": MessageLookupByLibrary.simpleMessage("Israeli"),
+        "requestPermission": MessageLookupByLibrary.simpleMessage(
+            "Camera permission denied.\nCamera permission must be enabled."),
+        "scanProduct": MessageLookupByLibrary.simpleMessage("Scan Product"),
+        "scanText": MessageLookupByLibrary.simpleMessage("Scan Text"),
+        "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "someThingHappened":
+            MessageLookupByLibrary.simpleMessage("Something happened"),
+        "successSend":
+            MessageLookupByLibrary.simpleMessage("Sent successfully"),
+        "thisFieldRequired":
+            MessageLookupByLibrary.simpleMessage("This field is required"),
+        "thisProductIsVeryGood": m2,
+        "updateAvailable":
+            MessageLookupByLibrary.simpleMessage("Update Available"),
+        "updateLater": MessageLookupByLibrary.simpleMessage("Update Later"),
+        "updateNow": MessageLookupByLibrary.simpleMessage("Update Now"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes")
+      };
 }

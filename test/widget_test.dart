@@ -29,12 +29,12 @@ void main() {
 
     splitTextWithList(largeText.toLowerCase(), data);
 
-    print('f : $f');
+    // print('f : $f');
 
     if (f.isNotEmpty) {
-      print('Text found');
+      // print('Text found');
     } else {
-      print('Text not found');
+      // print('Text not found');
     }
   });
 }

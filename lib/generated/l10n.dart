@@ -49,6 +49,236 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Scan Product`
+  String get scanProduct {
+    return Intl.message(
+      'Scan Product',
+      name: 'scanProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan Text`
+  String get scanText {
+    return Intl.message(
+      'Scan Text',
+      name: 'scanText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera permission denied.\nCamera permission must be enabled.`
+  String get requestPermission {
+    return Intl.message(
+      'Camera permission denied.\nCamera permission must be enabled.',
+      name: 'requestPermission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Click to Enable`
+  String get clickToEnable {
+    return Intl.message(
+      'Click to Enable',
+      name: 'clickToEnable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Boycott this {pro} Product because it is Israeli.`
+  String boycottThisProduct(Object pro) {
+    return Intl.message(
+      'Boycott this $pro Product because it is Israeli.',
+      name: 'boycottThisProduct',
+      desc: '',
+      args: [pro],
+    );
+  }
+
+  /// `An error occurred while scanning text`
+  String get anErrorOccurredWhileScanningText {
+    return Intl.message(
+      'An error occurred while scanning text',
+      name: 'anErrorOccurredWhileScanningText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This {pro} product is very good`
+  String thisProductIsVeryGood(Object pro) {
+    return Intl.message(
+      'This $pro product is very good',
+      name: 'thisProductIsVeryGood',
+      desc: '',
+      args: [pro],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message(
+      'Send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something happened`
+  String get someThingHappened {
+    return Intl.message(
+      'Something happened',
+      name: 'someThingHappened',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sent successfully`
+  String get successSend {
+    return Intl.message(
+      'Sent successfully',
+      name: 'successSend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get thisFieldRequired {
+    return Intl.message(
+      'This field is required',
+      name: 'thisFieldRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Product`
+  String get boycottProduct {
+    return Intl.message(
+      'Add Product',
+      name: 'boycottProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is this {pro} the name of the product`
+  String isThisTheProductName(Object pro) {
+    return Intl.message(
+      'Is this $pro the name of the product',
+      name: 'isThisTheProductName',
+      desc: '',
+      args: [pro],
+    );
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message(
+      'Edit',
+      name: 'edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CLosed Camera`
+  String get cameraClosed {
+    return Intl.message(
+      'CLosed Camera',
+      name: 'cameraClosed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Freedom for Palestine `
+  String get freedomForPalestine {
+    return Intl.message(
+      'Freedom for Palestine ',
+      name: 'freedomForPalestine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Israeli`
+  String get israeli {
+    return Intl.message(
+      'Israeli',
+      name: 'israeli',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Available`
+  String get updateAvailable {
+    return Intl.message(
+      'Update Available',
+      name: 'updateAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A new version of the app is available. Do you want to update now?`
+  String get aNewVersionOfTheAppIsAvailableDoYou {
+    return Intl.message(
+      'A new version of the app is available. Do you want to update now?',
+      name: 'aNewVersionOfTheAppIsAvailableDoYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Now`
+  String get updateNow {
+    return Intl.message(
+      'Update Now',
+      name: 'updateNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Later`
+  String get updateLater {
+    return Intl.message(
+      'Update Later',
+      name: 'updateLater',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -57,6 +287,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ar'),
     ];
   }
 

@@ -33,7 +33,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
         # Adjusts to the Flutter version you are working with
-          flutter-version: "3.3.10"
+          flutter-version: "3.13.9"
           channel: 'stable'
           # enabling caching for the Flutter SDK
           cache: true
