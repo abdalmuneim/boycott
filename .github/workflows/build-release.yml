@@ -2,17 +2,15 @@ name: Build and Release Flutter App
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main", "release" ]
   pull_request:
-    types:
-      - closed
-    branches:
-      - main 
+    branches: [ "main",  "release" ]
   workflow_dispatch:
 
 jobs:
   build_android:
+    if: github.event.pull_request.merged == true || github.event.commits.message=='release'
+    
     name: Build Android APK
     runs-on: ubuntu-latest
     steps:
@@ -60,6 +58,8 @@ jobs:
           allowUpdates: true
 
   build_ios:
+    if: github.event.pull_request.merged == true || github.event.commits.message=='release'
+
     name: Build iOS Release
     runs-on: macos-latest
     steps:

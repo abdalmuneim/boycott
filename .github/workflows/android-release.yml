@@ -1,35 +1,36 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
 name: Android Release
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    types:
-      - closed
-
-  workflow_dispatch:
+    branches: [ "main" ]
 
 jobs:
   build:
-    # if: github.event_name == 'pull_request' && github.event.action == 'closed' || contains(github.event.head_commit.message, 'build release')
+    if: github.event.pull_request.merged == true || github.event.commits.message=='build release'
     runs-on: ubuntu-latest
-    steps:
-     # Readies your repository under $GITHUB_WORKSPACE, so your job can access it
 
+     # Uses steps to represent a sequence of tasks that will be executed as part of job
+    steps: 
+      # Readies your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       # Sets up Java so your job can use it for the Flutter app build
-      - name: Setup Java 
-        uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         with:
-          distribution: "zulu"
+          distribution: 'zulu'
           java-version: "12.x"
-          cache: "gradle"
+          # providing Gradle to be cached with respect to the Java SDK
+          cache: 'gradle' 
       
       # Sets up Flutter using the subosito Flutter workflow
-      - name: Sets up Flutter using the subosito Flutter workflow
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with:
         # Adjusts to the Flutter version you are working with
           flutter-version: "3.13.9"
@@ -46,14 +47,14 @@ jobs:
             android/.gradle/
           key: ${{ runner.os }}-build_and_android-${{ hashFiles('**/*.gradle*', 'pubspec.lock') }}
 
-      - name: Install Flutter dependencies
+      - name: Install dependencies
         run: flutter pub get
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
       # - name: Verify formatting
       #   run: dart format --output=none --set-exit-if-changed .
 
-      - name: Analyze project 
+      - name: Analyze project source
         run: flutter analyze
       
       - name: Read release version
@@ -74,7 +75,6 @@ jobs:
 
       # --- creating github apk-release ---
       - name: Create apk-release in GitHub
-       
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/app-release.apk"
